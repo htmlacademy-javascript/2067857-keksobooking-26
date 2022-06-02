@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Yanina Mavlyutova](https://up.htmlacademy.ru/javascript/26/user/2067857).
-* Наставник: `Неизвестно`.
+* Наставник: `Maria Nag`.
 
 ---
 
