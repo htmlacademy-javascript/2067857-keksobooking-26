@@ -1,7 +1,7 @@
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
-  
+
   if(min < 0 || max <= min) {
     return;
   }
@@ -10,7 +10,7 @@ function getRandomIntInclusive(min, max) {
 getRandomIntInclusive(5,4);
 
 function getRandomArbitrary(min, max) {
-  
+
   if(min < 0 || max <= min){
     return;
   }
