@@ -144,5 +144,3 @@ createProposal();
 const SIMILAR_PPROPOSAL_COUNT = 10;
 // eslint-disable-next-line no-unused-vars
 const createSimilarProposals = Array.from({length: SIMILAR_PPROPOSAL_COUNT}, createProposal);
-
-
