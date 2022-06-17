@@ -71,6 +71,11 @@ function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
 }
 
+function getMixArr(arr) {
+  return arr.map((i) => [Math.random(),i]).sort().map((i) => i[1]);
+
+}
+
 const author = {
   avatar: function () {
     const createAvatar = [];
@@ -102,10 +107,8 @@ const createProposal = function () {
   const randomCheckoutIndex = getRandomIntInclusive(0, Offer.CHECKOUT.length - 1);
   const randomLat = getRandomArbitrary(Location.LAT.min, Location.LAT.max);
   const randomLng = getRandomArbitrary(Location.LNG.min, Location.LNG.max);
-  const randomFeaturesIndex = getRandomIntInclusive(0, Offer.FEATURES.length - 1);
-  const randomPhotosIndex = getRandomIntInclusive(0, Offer.PHOTOS.length - 1);
-  const getRandomFeaturesArray = Offer.FEATURES.map((i)=>[Math.random(),i]).sort().map((i) =>i[1]);
-  const getRandomPhotosArray = Offer.PHOTOS.map((i)=>[Math.random(),i]).sort().map((i)=>i[1]);
+  const getRandomFeaturesArray = getMixArr(Offer.FEATURES).splice(getRandomIntInclusive(0, Offer.FEATURES.length - 1));
+  const getRandomPhotosArray = getMixArr(Offer.PHOTOS).splice(getRandomIntInclusive(0, Offer.PHOTOS.length - 1));
 
   return {
     author: createAuthor(),
@@ -122,8 +125,8 @@ const createProposal = function () {
       lat: randomLat,
       lng: randomLng
     },
-    features: getRandomFeaturesArray.splice([randomFeaturesIndex]),
-    photos: getRandomPhotosArray.splice([randomPhotosIndex]),
+    features: getRandomFeaturesArray,
+    photos: getRandomPhotosArray,
   };
 };
 
