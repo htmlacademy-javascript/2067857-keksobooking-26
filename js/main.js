@@ -101,10 +101,11 @@ const createProposal = function () {
   const randomCheckinIndex = getRandomIntInclusive(0, Offer.CHECKIN.length - 1);
   const randomCheckoutIndex = getRandomIntInclusive(0, Offer.CHECKOUT.length - 1);
   const randomLat = getRandomArbitrary(Location.LAT.min, Location.LAT.max);
-  const randomLng = getRandomArbitrary(Location.LNG.min, Location.lng.max);
-
+  const randomLng = getRandomArbitrary(Location.LNG.min, Location.LNG.max);
   const randomFeaturesIndex = getRandomIntInclusive(0, Offer.FEATURES.length - 1);
   const randomPhotosIndex = getRandomIntInclusive(0, Offer.PHOTOS.length - 1);
+  const getRandomFeaturesArray = Offer.FEATURES.map((i)=>[Math.random(),i]).sort().map((i) =>i[1]);
+  const getRandomPhotosArray = Offer.PHOTOS.map((i)=>[Math.random(),i]).sort().map((i)=>i[1]);
 
   return {
     author: createAuthor(),
@@ -121,9 +122,8 @@ const createProposal = function () {
       lat: randomLat,
       lng: randomLng
     },
-
-    features: Offer.FEATURES[randomFeaturesIndex],
-    photos: Offer.PHOTOS[randomPhotosIndex],
+    features: getRandomFeaturesArray.splice([randomFeaturesIndex]),
+    photos: getRandomPhotosArray.splice([randomPhotosIndex]),
   };
 };
 
