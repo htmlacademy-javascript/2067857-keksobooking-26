@@ -80,7 +80,7 @@ const author = {
   avatar: function () {
     const createAvatar = [];
     const image = 'img/avatars/user';
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 0; i <= 10; i++) {
       if (i < 10) {
         createAvatar[i] = `${image}0${i}.png`;
       } else {
@@ -88,17 +88,12 @@ const author = {
       }
     }
 
-    return createAvatar;
+    return createAvatar.slice(1,11);
   },
 };
 
-const createAuthor = function () {
-  const randomAvatarIndex = getRandomIntInclusive(0, author.avatar().length - 1);
-
-  return { avatar: author.avatar()[randomAvatarIndex] };
-};
-
 const createProposal = function () {
+  const randomAvatarIndex = getRandomIntInclusive(0, author.avatar().length - 1);
   const randomPrice = getRandomIntInclusive(Offer.PRICE.min, Offer.PRICE.max);
   const randomGuests = getRandomIntInclusive(Offer.GUESTS.min, Offer.GUESTS.max);
   const randomRoom = getRandomIntInclusive(Offer.ROOMS.min, Offer.ROOMS.max);
@@ -111,7 +106,7 @@ const createProposal = function () {
   const getRandomPhotosArray = getMixArr(Offer.PHOTOS).splice(getRandomIntInclusive(0, Offer.PHOTOS.length - 1));
 
   return {
-    author: createAuthor(),
+    avatar: author.avatar()[randomAvatarIndex],
     title: Offer.TITLE,
     address: `${randomLat}, ${randomLng}`,
     price: `${randomPrice} USD`,
