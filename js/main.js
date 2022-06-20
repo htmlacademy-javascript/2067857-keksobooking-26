@@ -1,4 +1,8 @@
-const SIMILAR_PPROPOSAL_COUNT = 10;
+const SIMILAR_PROPOSAL_COUNT = 10;
+
+const Author = {
+  AVATAR: getAvatarArray(),
+};
 
 const Offer = {
   TITLE: 'Welcome to vacation',
@@ -31,7 +35,7 @@ const Offer = {
 
   FEATURES: ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'],
 
-  DESCRIPTION: 'Incredible location,lovely restaraunt,friendly welcome, kidness staff',
+  DESCRIPTION: 'Incredible location,lovely restaurant,friendly welcome, kindness staff',
 
   PHOTOS: [
     'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
@@ -72,28 +76,28 @@ function getRandomArbitrary(min, max) {
 }
 
 function getMixArr(arr) {
-  return arr.map((i) => [Math.random(),i]).sort().map((i) => i[1]);
 
+  return arr.map((i) => [Math.random(),i]).sort().map((i) => i[1]);
 }
 
-const author = {
-  avatar: function () {
-    const createAvatar = [];
-    const image = 'img/avatars/user';
-    for (let i = 0; i <= 10; i++) {
-      if (i < 10) {
-        createAvatar[i] = `${image}0${i}.png`;
-      } else {
-        createAvatar[i] = `${image + i}.png`;
-      }
-    }
+function getAvatarArray() {
+  const createAvatar = [];
+  const image = 'img/avatars/user';
 
-    return createAvatar.slice(1,11);
-  },
-};
+  for (let i = 0; i <= SIMILAR_PROPOSAL_COUNT; i++) {
+    if (i < 10) {
+      createAvatar[i] = `${image}0${i}.png`;
+    }
+    else {
+      createAvatar[i] = `${image + i}.png`;
+    }
+  }
+
+  return createAvatar.slice(1,11);
+}
 
 const createProposal = function () {
-  const randomAvatarIndex = getRandomIntInclusive(0, author.avatar().length - 1);
+  const randomAvatarIndex = getRandomIntInclusive(0, Author.AVATAR.length - 1);
   const randomPrice = getRandomIntInclusive(Offer.PRICE.min, Offer.PRICE.max);
   const randomGuests = getRandomIntInclusive(Offer.GUESTS.min, Offer.GUESTS.max);
   const randomRoom = getRandomIntInclusive(Offer.ROOMS.min, Offer.ROOMS.max);
@@ -106,7 +110,7 @@ const createProposal = function () {
   const getRandomPhotosArray = getMixArr(Offer.PHOTOS).splice(getRandomIntInclusive(0, Offer.PHOTOS.length - 1));
 
   return {
-    avatar: author.avatar()[randomAvatarIndex],
+    avatar: Author.AVATAR[randomAvatarIndex],
     title: Offer.TITLE,
     address: `${randomLat}, ${randomLng}`,
     price: `${randomPrice} USD`,
@@ -125,4 +129,4 @@ const createProposal = function () {
   };
 };
 
-Array.from({ length: SIMILAR_PPROPOSAL_COUNT }, createProposal);
+Array.from({ length: SIMILAR_PROPOSAL_COUNT }, createProposal);
