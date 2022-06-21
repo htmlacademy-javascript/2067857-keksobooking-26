@@ -1,7 +1,7 @@
 const SIMILAR_PROPOSAL_COUNT = 10;
 
 const Author = {
-  AVATAR: getAvatarArray(),
+  AVATAR: getAvatarArray('img/avatars/user'),
 };
 
 const Offer = {
@@ -80,9 +80,8 @@ function getMixArr(arr) {
   return arr.map((i) => [Math.random(),i]).sort().map((i) => i[1]);
 }
 
-function getAvatarArray() {
+function getAvatarArray(image) {
   const createAvatar = [];
-  const image = 'img/avatars/user';
 
   for (let i = 0; i <= SIMILAR_PROPOSAL_COUNT; i++) {
     if (i < 10) {
