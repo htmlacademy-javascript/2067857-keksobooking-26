@@ -110,22 +110,26 @@ const createProposal = function () {
   const getRandomPhotosArray = getMixArr(Offer.PHOTOS).splice(getRandomIntInclusive(0, Offer.PHOTOS.length - 1));
 
   return {
-    avatar: Author.AVATAR[randomAvatarIndex],
-    title: Offer.TITLE,
-    address: `${randomLat}, ${randomLng}`,
-    price: `${randomPrice} USD`,
-    type: Offer.HOUSE_TYPE[randomHouseTypeIndex],
-    rooms: randomRoom,
-    guests: randomGuests,
-    checkin: Offer.CHECKIN[randomCheckinIndex],
-    checkout: Offer.CHECKOUT[randomCheckoutIndex],
-    description: Offer.DESCRIPTION,
+    author: {
+      avatar:  Author.AVATAR[randomAvatarIndex]
+    },
+    offer: {
+      title: Offer.TITLE,
+      address: `${randomLat}, ${randomLng}`,
+      price: `${randomPrice} USD`,
+      type: Offer.HOUSE_TYPE[randomHouseTypeIndex],
+      rooms: randomRoom,
+      guests: randomGuests,
+      checkin: Offer.CHECKIN[randomCheckinIndex],
+      checkout: Offer.CHECKOUT[randomCheckoutIndex],
+      description: Offer.DESCRIPTION,
+      features: getRandomFeaturesArray,
+      photos: getRandomPhotosArray,
+    },
     location: {
       lat: randomLat,
       lng: randomLng
     },
-    features: getRandomFeaturesArray,
-    photos: getRandomPhotosArray,
   };
 };
 
