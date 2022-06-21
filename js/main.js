@@ -92,7 +92,7 @@ function getAvatarArray(image) {
     }
   }
 
-  return createAvatar.slice(1,11);
+  return createAvatar.slice(1,createAvatar.length);
 }
 
 const createProposal = function () {
