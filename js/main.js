@@ -1,16 +1,11 @@
 const SIMILAR_PROPOSAL_COUNT = 10;
 
-const Author = {
-  AVATAR: getAvatarArray('img/avatars/user'),
-};
+const AUTHOR_URL = 'img/avatars/user';
 
 const Offer = {
   TITLE: 'Welcome to vacation',
 
-  ADDRESS: [
-    //LOCATION.lat,
-    //LOCATION.lat
-  ],
+  ADDRESS: [],
 
   PRICE: {
     min: 500,
@@ -75,9 +70,13 @@ function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-function getMixArr(arr) {
+function getMixArray(array) {
+  const arrayNew = array.map((index) => [Math.random(), index]);
+  const arraySort = arrayNew.sort();
+  const arrayMixed = arraySort.map((index) => index[1]);
+  const arrayMixLength = arrayMixed.splice(getRandomIntInclusive(0, array.length - 1));
 
-  return arr.map((i) => [Math.random(),i]).sort().map((i) => i[1]);
+  return arrayMixLength;
 }
 
 function getAvatarArray(image) {
@@ -86,17 +85,16 @@ function getAvatarArray(image) {
   for (let i = 0; i <= SIMILAR_PROPOSAL_COUNT; i++) {
     if (i < 10) {
       createAvatar[i] = `${image}0${i}.png`;
-    }
-    else {
+    } else {
       createAvatar[i] = `${image + i}.png`;
     }
   }
-
-  return createAvatar.slice(1,createAvatar.length);
+  //возвращает массив с индекса 1,потому как нет картинки 00
+  return createAvatar.slice(1, createAvatar.length);
 }
 
-const createProposal = function () {
-  const randomAvatarIndex = getRandomIntInclusive(0, Author.AVATAR.length - 1);
+function createProposal() {
+  const randomAvatarIndex = getRandomIntInclusive(0, getAvatarArray(AUTHOR_URL).length - 1);
   const randomPrice = getRandomIntInclusive(Offer.PRICE.min, Offer.PRICE.max);
   const randomGuests = getRandomIntInclusive(Offer.GUESTS.min, Offer.GUESTS.max);
   const randomRoom = getRandomIntInclusive(Offer.ROOMS.min, Offer.ROOMS.max);
@@ -105,12 +103,12 @@ const createProposal = function () {
   const randomCheckoutIndex = getRandomIntInclusive(0, Offer.CHECKOUT.length - 1);
   const randomLat = getRandomArbitrary(Location.LAT.min, Location.LAT.max);
   const randomLng = getRandomArbitrary(Location.LNG.min, Location.LNG.max);
-  const getRandomFeaturesArray = getMixArr(Offer.FEATURES).splice(getRandomIntInclusive(0, Offer.FEATURES.length - 1));
-  const getRandomPhotosArray = getMixArr(Offer.PHOTOS).splice(getRandomIntInclusive(0, Offer.PHOTOS.length - 1));
+  const getRandomFeaturesArray = getMixArray(Offer.FEATURES);
+  const getRandomPhotosArray = getMixArray(Offer.PHOTOS);
 
   return {
     author: {
-      avatar:  Author.AVATAR[randomAvatarIndex]
+      avatar: getAvatarArray(AUTHOR_URL)[randomAvatarIndex],
     },
     offer: {
       title: Offer.TITLE,
@@ -127,9 +125,14 @@ const createProposal = function () {
     },
     location: {
       lat: randomLat,
-      lng: randomLng
+      lng: randomLng,
     },
   };
-};
+}
 
-Array.from({ length: SIMILAR_PROPOSAL_COUNT }, createProposal);
+Array.from(
+  {
+    length: SIMILAR_PROPOSAL_COUNT,
+  },
+  createProposal
+);
