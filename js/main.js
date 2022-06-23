@@ -89,7 +89,7 @@ function getAvatarArray(image) {
       createAvatar[i] = `${image + i}.png`;
     }
   }
-  //возвращает массив с индекса 1,потому как нет картинки 00
+  //возвращает массив с индекса 1,потому как нет картинки под номером '00'
   return createAvatar.slice(1, createAvatar.length);
 }
 
