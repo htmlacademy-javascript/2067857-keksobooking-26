@@ -91,7 +91,6 @@ function createProposal() {
   };
 }
 
-const createProposals = Array.from({length: SIMILAR_PROPOSAL_COUNT},createProposal);
+Array.from({length: SIMILAR_PROPOSAL_COUNT},createProposal);
 
 export {SIMILAR_PROPOSAL_COUNT};
-export {createProposals};
