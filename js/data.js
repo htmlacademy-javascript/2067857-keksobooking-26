@@ -1,7 +1,7 @@
 import {getRandomIntInclusive,getRandomArbitrary,getMixArray} from './util.js';
 import {getAvatarArray} from './additional-functions.js';
 
-const SIMILAR_PROPOSAL_COUNT = 10;
+const SIMILAR_PROPOSAL_COUNT = 1;
 
 const AUTHOR_URL = 'img/avatars/user';
 
@@ -74,7 +74,7 @@ function createProposal() {
     offer: {
       title: Offer.TITLE,
       address: `${randomLat}, ${randomLng}`,
-      price: `${randomPrice} USD`,
+      price: `${randomPrice} ₽`,
       type: Offer.HOUSE_TYPE[randomHouseTypeIndex],
       rooms: randomRoom,
       guests: randomGuests,
@@ -91,6 +91,7 @@ function createProposal() {
   };
 }
 
-Array.from({length: SIMILAR_PROPOSAL_COUNT},createProposal);
+const createProposals = () => Array.from({length: SIMILAR_PROPOSAL_COUNT},createProposal);
 
 export {SIMILAR_PROPOSAL_COUNT};
+export {createProposals};

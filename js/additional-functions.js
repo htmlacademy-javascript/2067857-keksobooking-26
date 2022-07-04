@@ -1,4 +1,4 @@
-import {SIMILAR_PROPOSAL_COUNT} from './data';
+import {SIMILAR_PROPOSAL_COUNT} from './data.js';
 
 function getAvatarArray(image) {
   const createAvatar = [];
