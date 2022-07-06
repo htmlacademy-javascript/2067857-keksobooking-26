@@ -33,6 +33,7 @@ similarCard.forEach((proposal) => {
     }
   });
   cardElement.querySelector('.popup__description').textContent = proposal.offer.description;
+  cardElement.querySelector('.popup__description').classList.add('hidden');
 
   for (let image = 0; image <= proposal.offer.photos.length - 1; image++) {
     cardElement.querySelector('.popup__photo').src = proposal.offer.photos[image];
