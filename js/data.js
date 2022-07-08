@@ -1,11 +1,11 @@
 import { getRandomIntInclusive, getRandomArbitrary, getMixArray } from './util.js';
 import { getAvatarArray } from './additional-functions.js';
 
-const SIMILAR_PROPOSAL_COUNT = 1;
+const SIMILAR_PROPOSAL_COUNT = 10;
 
 const AUTHOR_URL = 'img/avatars/user';
 
-const Types = {
+const typesHouse = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
   house: 'Дом',
@@ -15,8 +15,6 @@ const Types = {
 
 const Offer = {
   TITLE: 'Welcome to vacation',
-
-  ADDRESS: [],
 
   PRICE: {
     min: 500,
@@ -101,5 +99,5 @@ function createProposal() {
 
 const createProposals = () => Array.from({ length: SIMILAR_PROPOSAL_COUNT }, createProposal);
 
-export { SIMILAR_PROPOSAL_COUNT, createProposals, Types };
+export { SIMILAR_PROPOSAL_COUNT, createProposals, typesHouse };
 
