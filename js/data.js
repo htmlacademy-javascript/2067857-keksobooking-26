@@ -39,7 +39,7 @@ const Offer = {
 
   FEATURES: ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'],
 
-  DESCRIPTION: 'Incredible location,lovely restaurant,friendly welcome, kindness staff',
+  DESCRIPTION:[ 'Incredible location,lovely restaurant,friendly welcome, kindness staff'],
 
   PHOTOS: [
     'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',

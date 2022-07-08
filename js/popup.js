@@ -20,7 +20,11 @@ proposalCards.forEach((proposal) => {
   ).textContent = `Заезд после${proposal.offer.checkin}, выезд до${proposal.offer.checkout}`;
 
   cardElement.querySelector('.popup__description').textContent = proposal.offer.description;
-  cardElement.querySelector('.popup__description').classList.add('hidden');
+  const hiddenElement = proposal.offer.description = '';
+
+  if(hiddenElement){
+    cardElement.querySelector('.popup__description').classList.add('hidden');
+  }
 
   getCapacityElements(cardElement, proposal);
   getHouseTypeElement(cardElement, proposal);
