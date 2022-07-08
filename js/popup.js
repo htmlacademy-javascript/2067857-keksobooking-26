@@ -1,4 +1,5 @@
 import { createProposals, typesHouse } from './data.js';
+import {getNumWord } from './util.js';
 
 const mapCanvas = document.querySelector('#map-canvas');
 
@@ -72,27 +73,12 @@ function getPhotosElement(cardElement, proposal) {
 }
 
 function getCapacityElements(cardElement, proposal) {
-  function numWord(value, word) {
-    const num = value % 10;
-
-    if (num > 1 && value < 5) {
-      return word[1];
-    }
-    if (num >= 5) {
-      return word[2];
-    }
-    if (num === 1) {
-      return word[0];
-    }
-    return word[2];
-  }
-
   const ROOMS = proposal.offer.rooms;
   const GUESTS = proposal.offer.guests;
 
-  cardElement.querySelector('.popup__text--capacity').textContent = `${ROOMS} ${numWord(ROOMS, [
+  cardElement.querySelector('.popup__text--capacity').textContent = `${ROOMS} ${getNumWord(ROOMS, [
     ' комната ',
     ' комнаты ',
     ' комнат ',
-  ])} для ${GUESTS}${numWord(GUESTS, [' гостя', ' гостей', ' гостей'])}`;
+  ])} для ${GUESTS}${getNumWord(GUESTS, [' гостя', ' гостей', ' гостей'])}`;
 }

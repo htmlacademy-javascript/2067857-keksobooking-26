@@ -26,4 +26,19 @@ function getMixArray(array) {
   return arrayMixLength;
 }
 
-export {getRandomIntInclusive,getRandomArbitrary,getMixArray};
+function getNumWord(value, word) {
+  const num = value % 10;
+
+  if (num > 1 && value < 5) {
+    return word[1];
+  }
+  if (num >= 5) {
+    return word[2];
+  }
+  if (num === 1) {
+    return word[0];
+  }
+  return word[2];
+}
+
+export {getRandomIntInclusive,getRandomArbitrary,getMixArray,getNumWord};
