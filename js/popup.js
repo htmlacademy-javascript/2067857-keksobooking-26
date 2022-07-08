@@ -1,5 +1,5 @@
 import { createProposals, typesHouse } from './data.js';
-import {getNumWord } from './util.js';
+import { getNumWord } from './util.js';
 
 const mapCanvas = document.querySelector('#map-canvas');
 

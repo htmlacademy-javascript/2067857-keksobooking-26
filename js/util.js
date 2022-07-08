@@ -41,4 +41,4 @@ function getNumWord(value, word) {
   return word[2];
 }
 
-export {getRandomIntInclusive,getRandomArbitrary,getMixArray,getNumWord};
+export { getRandomIntInclusive, getRandomArbitrary, getMixArray, getNumWord };
