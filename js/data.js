@@ -5,8 +5,8 @@ const SIMILAR_PROPOSAL_COUNT = 1;
 
 const AUTHOR_URL = 'img/avatars/user';
 
-const ROOM_WORD_ARRAY = [' комната ', ' комнаты ', ' комнат '];
-const GUEST_WORD_ARRAY = [' гостя', ' гостей', ' гостей'];
+const ROOM_WORDS = ['комната', 'комнаты', 'комнат'];
+const GUEST_WORDS = [' гостя', ' гостей', ' гостей'];
 
 const typesHouse = {
   flat: 'Квартира',
@@ -102,4 +102,4 @@ function createProposal() {
   };
 }
 
-export { SIMILAR_PROPOSAL_COUNT, createProposals, typesHouse, ROOM_WORD_ARRAY, GUEST_WORD_ARRAY };
+export { SIMILAR_PROPOSAL_COUNT, createProposals, typesHouse, ROOM_WORDS, GUEST_WORDS };

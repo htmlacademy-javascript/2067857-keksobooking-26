@@ -1,4 +1,4 @@
-import { createProposals, typesHouse, ROOM_WORD_ARRAY, GUEST_WORD_ARRAY } from './data.js';
+import { createProposals, typesHouse, ROOM_WORDS, GUEST_WORDS } from './data.js';
 import { getPluralWord } from './util.js';
 
 const mapCanvas = document.querySelector('#map-canvas');
@@ -36,41 +36,38 @@ proposalCards.forEach((proposal) => {
 function getHouseTypeElement(cardElement, proposal) {
   cardElement.querySelector('.popup__type').innerHTML = '';
 
-  for (const value of Object.values(proposal.offer)) {
-    const typeItem = document.createElement('h4');
+  const typeItem = document.createElement('h4');
+  typeItem.textContent = typesHouse[proposal.offer.type];
 
-    typeItem.textContent = typesHouse[value];
-
-    cardElement.querySelector('.popup__type').append(typeItem);
-  }
+  cardElement.querySelector('.popup__type').append(typeItem);
 }
 
 function getFeaturesElement(cardElement, proposal) {
-  const featureListFragment = document.createDocumentFragment();
+  const featuresListFragment = document.createDocumentFragment();
 
   proposal.offer.features.forEach((feature) => {
     const cardFeatureItem = cardElement.querySelector(`.popup__feature--${feature}`);
 
-    if (cardFeatureItem) {
-      featureListFragment.append(cardFeatureItem);
-    }
+    featuresListFragment.append(cardFeatureItem);
   });
 
   cardElement.querySelector('.popup__features').innerHTML = '';
-  cardElement.querySelector('.popup__features').append(featureListFragment);
+  cardElement.querySelector('.popup__features').append(featuresListFragment);
 }
 
 function getPhotosElement(cardElement, proposal) {
-  cardElement.querySelector('.popup__photos').innerHTML = '';
+  const photosListFragment = document.createDocumentFragment();
 
   for (let i = 0; i <= proposal.offer.photos.length - 1; i++) {
-    const photoTemplate = document.querySelector('#card').content.querySelector('.popup__photo');
-    const cardPhotoElement = photoTemplate.cloneNode(true);
+    const PhotoTemplate = document.querySelector('#card').content.querySelector('.popup__photo');
+    const cardPhotoElement = PhotoTemplate.cloneNode(true);
 
     cardPhotoElement.src = proposal.offer.photos[i];
-
-    cardElement.querySelector('.popup__photos').append(cardPhotoElement);
+    photosListFragment.append(cardPhotoElement);
   }
+
+  cardElement.querySelector('.popup__photos').innerHTML = '';
+  cardElement.querySelector('.popup__photos').append(photosListFragment);
 }
 
 function getCapacityElements(cardElement, proposal) {
@@ -79,6 +76,6 @@ function getCapacityElements(cardElement, proposal) {
 
   cardElement.querySelector('.popup__text--capacity').textContent = `${rooms} ${getPluralWord(
     rooms,
-    ROOM_WORD_ARRAY
-  )} для ${guests}${getPluralWord(guests, GUEST_WORD_ARRAY)}`;
+    ROOM_WORDS
+  )} для ${guests}${getPluralWord(guests, GUEST_WORDS)}`;
 }
