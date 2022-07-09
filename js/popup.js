@@ -1,11 +1,11 @@
-import { createProposals, typesHouse } from './data.js';
-import { getNumWord } from './util.js';
+import { createProposals, typesHouse, ROOM_WORD_ARRAY, GUEST_WORD_ARRAY } from './data.js';
+import { getPluralWord } from './util.js';
 
 const mapCanvas = document.querySelector('#map-canvas');
 
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
 
-const proposalCards = createProposals();
+const proposalCards = createProposals;
 
 proposalCards.forEach((proposal) => {
   const cardElement = cardTemplate.cloneNode(true);
@@ -20,9 +20,8 @@ proposalCards.forEach((proposal) => {
   ).textContent = `Заезд после${proposal.offer.checkin}, выезд до${proposal.offer.checkout}`;
 
   cardElement.querySelector('.popup__description').textContent = proposal.offer.description;
-  const hiddenElement = proposal.offer.description = '';
 
-  if(hiddenElement){
+  if (!proposal.offer.description) {
     cardElement.querySelector('.popup__description').classList.add('hidden');
   }
 
@@ -37,38 +36,36 @@ proposalCards.forEach((proposal) => {
 function getHouseTypeElement(cardElement, proposal) {
   cardElement.querySelector('.popup__type').innerHTML = '';
 
-  const typeArray = proposal.offer.type.split();
-
-  typeArray.forEach((item) => {
+  for (const value of Object.values(proposal.offer)) {
     const typeItem = document.createElement('h4');
 
-    typeItem.textContent = typesHouse[item];
+    typeItem.textContent = typesHouse[value];
 
     cardElement.querySelector('.popup__type').append(typeItem);
-  });
+  }
 }
 
 function getFeaturesElement(cardElement, proposal) {
-  const cardFeatureElements = cardElement.querySelectorAll('.popup__feature');
+  const featureListFragment = document.createDocumentFragment();
 
-  cardFeatureElements.forEach((featuresListItem) => {
-    const isNecessary = proposal.offer.features.some((feature) =>
-      featuresListItem.classList.contains(`popup__feature--${feature}`)
-    );
+  proposal.offer.features.forEach((feature) => {
+    const cardFeatureItem = cardElement.querySelector(`.popup__feature--${feature}`);
 
-    if (!isNecessary) {
-      featuresListItem.remove();
+    if (cardFeatureItem) {
+      featureListFragment.append(cardFeatureItem);
     }
-    return featuresListItem;
   });
+
+  cardElement.querySelector('.popup__features').innerHTML = '';
+  cardElement.querySelector('.popup__features').append(featureListFragment);
 }
 
 function getPhotosElement(cardElement, proposal) {
   cardElement.querySelector('.popup__photos').innerHTML = '';
 
   for (let i = 0; i <= proposal.offer.photos.length - 1; i++) {
-    const PhotoTemplate = document.querySelector('#card').content.querySelector('.popup__photo');
-    const cardPhotoElement = PhotoTemplate.cloneNode(true);
+    const photoTemplate = document.querySelector('#card').content.querySelector('.popup__photo');
+    const cardPhotoElement = photoTemplate.cloneNode(true);
 
     cardPhotoElement.src = proposal.offer.photos[i];
 
@@ -77,12 +74,11 @@ function getPhotosElement(cardElement, proposal) {
 }
 
 function getCapacityElements(cardElement, proposal) {
-  const ROOMS = proposal.offer.rooms;
-  const GUESTS = proposal.offer.guests;
+  const rooms = proposal.offer.rooms;
+  const guests = proposal.offer.guests;
 
-  cardElement.querySelector('.popup__text--capacity').textContent = `${ROOMS} ${getNumWord(ROOMS, [
-    ' комната ',
-    ' комнаты ',
-    ' комнат ',
-  ])} для ${GUESTS}${getNumWord(GUESTS, [' гостя', ' гостей', ' гостей'])}`;
+  cardElement.querySelector('.popup__text--capacity').textContent = `${rooms} ${getPluralWord(
+    rooms,
+    ROOM_WORD_ARRAY
+  )} для ${guests}${getPluralWord(guests, GUEST_WORD_ARRAY)}`;
 }

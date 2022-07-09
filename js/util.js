@@ -26,10 +26,10 @@ function getMixArray(array) {
   return arrayMixLength;
 }
 
-function getNumWord(value, word) {
+function getPluralWord(value, word) {
   const num = value % 10;
 
-  if (num > 1 && value < 5) {
+  if (value > 1 && value < 5 && value === 0) {
     return word[1];
   }
   if (num >= 5) {
@@ -41,4 +41,4 @@ function getNumWord(value, word) {
   return word[2];
 }
 
-export { getRandomIntInclusive, getRandomArbitrary, getMixArray, getNumWord };
+export { getRandomIntInclusive, getRandomArbitrary, getMixArray, getPluralWord };
