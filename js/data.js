@@ -6,7 +6,7 @@ const SIMILAR_PROPOSAL_COUNT = 1;
 const AUTHOR_URL = 'img/avatars/user';
 
 const ROOM_WORDS = ['комната', 'комнаты', 'комнат'];
-const GUEST_WORDS = [' гостя', ' гостей', ' гостей'];
+const GUEST_WORDS = ['гостя', 'гостей', 'гостей'];
 
 const typesHouse = {
   flat: 'Квартира',

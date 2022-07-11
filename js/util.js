@@ -29,7 +29,7 @@ function getMixArray(array) {
 function getPluralWord(value, word) {
   const num = value % 10;
 
-  if (value > 1 && value < 5 && value === 0) {
+  if (value > 1 && value < 5 || value === 0) {
     return word[1];
   }
   if (num >= 5) {
