@@ -1,14 +1,23 @@
-import {getRandomIntInclusive,getRandomArbitrary,getMixArray} from './util.js';
-import {getAvatarArray} from './additional-functions.js';
+import { getRandomIntInclusive, getRandomArbitrary, getMixArray } from './util.js';
+import { getAvatarArray } from './additional-functions.js';
 
-const SIMILAR_PROPOSAL_COUNT = 10;
+const SIMILAR_PROPOSAL_COUNT = 1;
 
 const AUTHOR_URL = 'img/avatars/user';
 
+const ROOM_WORDS = ['комната', 'комнаты', 'комнат'];
+const GUEST_WORDS = ['гостя', 'гостей', 'гостей'];
+
+const typesHouse = {
+  flat: 'Квартира',
+  bungalow: 'Бунгало',
+  house: 'Дом',
+  palace: 'Дворец',
+  hotel: 'Отель',
+};
+
 const Offer = {
   TITLE: 'Welcome to vacation',
-
-  ADDRESS: [],
 
   PRICE: {
     min: 500,
@@ -33,7 +42,7 @@ const Offer = {
 
   FEATURES: ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'],
 
-  DESCRIPTION: 'Incredible location,lovely restaurant,friendly welcome, kindness staff',
+  DESCRIPTION: ['Incredible location,lovely restaurant,friendly welcome, kindness staff'],
 
   PHOTOS: [
     'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
@@ -53,6 +62,8 @@ const Location = {
     max: 139.8,
   },
 };
+
+const createProposals = Array.from({ length: SIMILAR_PROPOSAL_COUNT }, createProposal);
 
 function createProposal() {
   const randomAvatarIndex = getRandomIntInclusive(0, getAvatarArray(AUTHOR_URL).length - 1);
@@ -74,7 +85,7 @@ function createProposal() {
     offer: {
       title: Offer.TITLE,
       address: `${randomLat}, ${randomLng}`,
-      price: `${randomPrice} USD`,
+      price: `${randomPrice} ₽`,
       type: Offer.HOUSE_TYPE[randomHouseTypeIndex],
       rooms: randomRoom,
       guests: randomGuests,
@@ -91,6 +102,4 @@ function createProposal() {
   };
 }
 
-Array.from({length: SIMILAR_PROPOSAL_COUNT},createProposal);
-
-export {SIMILAR_PROPOSAL_COUNT};
+export { SIMILAR_PROPOSAL_COUNT, createProposals, typesHouse, ROOM_WORDS, GUEST_WORDS };
