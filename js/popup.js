@@ -17,7 +17,7 @@ proposalCards.forEach((proposal) => {
 
   cardElement.querySelector(
     '.popup__text--time'
-  ).textContent = `Заезд после${proposal.offer.checkin}, выезд до${proposal.offer.checkout}`;
+  ).textContent = `Заезд после ${proposal.offer.checkin}, выезд до ${proposal.offer.checkout}`;
 
   cardElement.querySelector('.popup__description').textContent = proposal.offer.description;
 
