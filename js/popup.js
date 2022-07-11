@@ -77,5 +77,5 @@ function getCapacityElements(cardElement, proposal) {
   cardElement.querySelector('.popup__text--capacity').textContent = `${rooms} ${getPluralWord(
     rooms,
     ROOM_WORDS
-  )} для   ${guests} ${getPluralWord(guests, GUEST_WORDS)}`;
+  )} для ${guests} ${getPluralWord(guests, GUEST_WORDS)}`;
 }
