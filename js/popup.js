@@ -74,10 +74,8 @@ function getCapacityElements(cardElement, proposal) {
   const rooms = proposal.offer.rooms;
   const guests = proposal.offer.guests;
 
-  cardElement.querySelector('.popup__text--capacity').textContent =
-    `${rooms} ${getPluralWord(
-      rooms,
-      ROOM_WORDS
-      // eslint-disable-next-line no-useless-concat
-    )} для ` + `  ${guests} ${getPluralWord(guests, GUEST_WORDS)}`;
+  cardElement.querySelector('.popup__text--capacity').textContent = `${rooms} ${getPluralWord(
+    rooms,
+    ROOM_WORDS
+  )} для   ${guests} ${getPluralWord(guests, GUEST_WORDS)}`;
 }
