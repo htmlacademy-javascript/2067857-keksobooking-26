@@ -2,7 +2,7 @@ function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
 
-  if (min < 0 || max <= min) {
+  if (min < 0 || max < min) {
     return;
   }
 
@@ -10,7 +10,7 @@ function getRandomIntInclusive(min, max) {
 }
 
 function getRandomArbitrary(min, max) {
-  if (min < 0 || max <= min) {
+  if (min < 0 || max < min) {
     return;
   }
 
@@ -29,7 +29,7 @@ function getMixArray(array) {
 function getPluralWord(value, word) {
   const num = value % 10;
 
-  if (value > 1 && value < 5 || value === 0) {
+  if ((value > 1 && value < 5) || value === 0) {
     return word[1];
   }
   if (num >= 5) {

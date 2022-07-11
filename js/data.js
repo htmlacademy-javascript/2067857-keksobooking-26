@@ -1,7 +1,7 @@
 import { getRandomIntInclusive, getRandomArbitrary, getMixArray } from './util.js';
 import { getAvatarArray } from './additional-functions.js';
 
-const SIMILAR_PROPOSAL_COUNT = 2;
+const SIMILAR_PROPOSAL_COUNT = 1;
 
 const AUTHOR_URL = 'img/avatars/user';
 
