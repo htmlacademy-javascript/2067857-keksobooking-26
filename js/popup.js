@@ -59,8 +59,8 @@ function getPhotosElement(cardElement, proposal) {
   const photosListFragment = document.createDocumentFragment();
 
   for (let i = 0; i <= proposal.offer.photos.length - 1; i++) {
-    const PhotoTemplate = document.querySelector('#card').content.querySelector('.popup__photo');
-    const cardPhotoElement = PhotoTemplate.cloneNode(true);
+    const photoTemplate = document.querySelector('#card').content.querySelector('.popup__photo');
+    const cardPhotoElement = photoTemplate.cloneNode(true);
 
     cardPhotoElement.src = proposal.offer.photos[i];
     photosListFragment.append(cardPhotoElement);
