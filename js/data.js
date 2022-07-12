@@ -16,6 +16,21 @@ const typesHouse = {
   hotel: 'Отель',
 };
 
+const capacityOptions = {
+  1: ['1'],
+  2: ['2', '1'],
+  3: ['3', '2', '1'],
+  100: ['0'],
+};
+
+const minAmount = {
+  bungalow: 0,
+  flat: 1000,
+  hotel: 3000,
+  house: 5000,
+  palace: 10000,
+};
+
 const Offer = {
   TITLE: 'Welcome to vacation',
 
@@ -102,4 +117,12 @@ function createProposal() {
   };
 }
 
-export { SIMILAR_PROPOSAL_COUNT, createProposals, typesHouse, ROOM_WORDS, GUEST_WORDS };
+export {
+  SIMILAR_PROPOSAL_COUNT,
+  createProposals,
+  typesHouse,
+  ROOM_WORDS,
+  GUEST_WORDS,
+  minAmount,
+  capacityOptions,
+};
