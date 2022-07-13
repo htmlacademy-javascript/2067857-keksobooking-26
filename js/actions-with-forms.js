@@ -9,6 +9,7 @@ const fieldsetElements = document.querySelectorAll('fieldset');
 const priceField = proposalForm.querySelector('#price');
 const capacityRooms = proposalForm.querySelector('[name="rooms"]');
 const quantityGuests = proposalForm.querySelector('[name="capacity"]');
+const houseTypeOptions = proposalForm.querySelector('[name="type"]');
 
 const pristine = new Pristine(proposalForm, {
   classTo: 'ad-form__element',
@@ -54,8 +55,7 @@ function validateTitle(value) {
 }
 
 function validatePrice(value) {
-  const options = proposalForm.querySelector('[name="type"]');
-  return value.length && parseInt(value, 10) >= minAmount[options.value];
+  return value.length && parseInt(value, 10) >= minAmount[houseTypeOptions.value];
 }
 
 function onTypeChange() {
@@ -68,8 +68,7 @@ proposalForm.querySelectorAll('[name="type"]').forEach((item) => {
 });
 
 function getPriceErrorMessage() {
-  const options = proposalForm.querySelector('[name="type"]');
-  return `Не менее ${minAmount[options.value]} ₽ в выбранной категории`;
+  return `Не менее ${minAmount[houseTypeOptions.value]} ₽ в выбранной категории`;
 }
 
 function validateCapacity() {
