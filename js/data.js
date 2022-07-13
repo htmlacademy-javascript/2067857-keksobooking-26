@@ -123,6 +123,6 @@ export {
   typesHouse,
   ROOM_WORDS,
   GUEST_WORDS,
-  capacityOptions,
   minAmount,
+  capacityOptions,
 };
