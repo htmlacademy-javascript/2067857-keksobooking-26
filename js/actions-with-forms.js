@@ -1,4 +1,10 @@
-import { minAmount, ROOM_WORDS, GUEST_WORDS, capacityOptions } from './data.js';
+import {
+  minPriceAmount,
+  ROOM_WORDS,
+  GUEST_WORDS,
+  capacityGuestsOptions,
+  TITLE_ERROR_MESSAGE,
+} from './data.js';
 import { getPluralWord } from './util.js';
 
 const proposalForm = document.querySelector('.ad-form');
@@ -6,10 +12,14 @@ const mapFiletersElement = document.querySelector('.map__filters');
 const selectedElements = document.querySelectorAll('select');
 const fieldsetElements = document.querySelectorAll('fieldset');
 
+const titleField = proposalForm.querySelector('#title');
 const priceField = proposalForm.querySelector('#price');
-const capacityRooms = proposalForm.querySelector('[name="rooms"]');
-const quantityGuests = proposalForm.querySelector('[name="capacity"]');
+const quantityRooms = proposalForm.querySelector('[name="rooms"]');
+const capacityGuests = proposalForm.querySelector('[name="capacity"]');
 const houseTypeOptions = proposalForm.querySelector('[name="type"]');
+const quantityRoomsElements = proposalForm.querySelectorAll('[name="rooms"]');
+const capacityGuestsElements = proposalForm.querySelectorAll('[name="capacity"]');
+const houseTypeElements = proposalForm.querySelectorAll('[name="type"]');
 
 const pristine = new Pristine(proposalForm, {
   classTo: 'ad-form__element',
@@ -54,58 +64,66 @@ function validateTitle(value) {
   return value.length >= 30 && value.length <= 100;
 }
 
+pristine.validate();
+
 function validatePrice(value) {
-  return value.length && parseInt(value, 10) >= minAmount[houseTypeOptions.value];
+  return value.length && parseInt(value, 10) >= minPriceAmount[houseTypeOptions.value];
 }
 
 function onTypeChange() {
-  priceField.placeholder = minAmount[this.value];
+  priceField.placeholder = minPriceAmount[this.value];
   pristine.validate(priceField);
 }
 
-proposalForm.querySelectorAll('[name="type"]').forEach((item) => {
+houseTypeElements.forEach((item) => {
   item.addEventListener('change', onTypeChange);
 });
 
 function getPriceErrorMessage() {
-  return `Не менее ${minAmount[houseTypeOptions.value]} ₽ в выбранной категории`;
+  return `Не менее ${minPriceAmount[houseTypeOptions.value]} ₽ в выбранной категории`;
 }
 
 function validateCapacity() {
-  return capacityOptions[capacityRooms.value].includes(quantityGuests.value);
+  return capacityGuestsOptions[quantityRooms.value].includes(capacityGuests.value);
 }
 
 function onCapacityChange() {
-  capacityRooms.placeholder = capacityOptions[this.value];
-  pristine.validate(capacityRooms);
+  quantityRooms.placeholder = capacityGuestsOptions[this.value];
+  pristine.validate(quantityRooms);
 
-  quantityGuests.placeholder = capacityOptions[this.value];
-  pristine.validate(quantityGuests);
+  capacityGuests.placeholder = capacityGuestsOptions[this.value];
+  pristine.validate(capacityGuests);
 }
 
-proposalForm.querySelectorAll('[name="capacity"]').forEach((item) => {
+capacityGuestsElements.forEach((item) => {
   item.addEventListener('change', onCapacityChange);
 });
 
-proposalForm.querySelectorAll('[name="rooms"]').forEach((item) => {
+quantityRoomsElements.forEach((item) => {
   item.addEventListener('change', onCapacityChange);
 });
 
 function getCapacityErrorMessage() {
-  return `${capacityRooms.value}  ${getPluralWord(capacityRooms.value, ROOM_WORDS)}
-          ${'для '}${quantityGuests.value} ${getPluralWord(quantityGuests.value, GUEST_WORDS)}
+  return `${quantityRooms.value}  ${getPluralWord(quantityRooms.value, ROOM_WORDS)}
+          ${'для '}${capacityGuests.value} ${getPluralWord(capacityGuests.value, GUEST_WORDS)}
           ${':неприменимо'}`;
 }
 
-proposalForm.addEventListener('submit', (evt) => {
+function applyPreventDefault(evt) {
   const isValid = pristine.validate();
+
   if (!isValid) {
     evt.preventDefault();
   }
+}
+
+proposalForm.addEventListener('submit', (evt) => {
+  applyPreventDefault(evt);
+
   pristine.validate();
 });
 
-pristine.addValidator(proposalForm.querySelector('#title'), validateTitle, 'От 30 до 100 символов');
+pristine.addValidator(titleField, validateTitle, TITLE_ERROR_MESSAGE);
 pristine.addValidator(priceField, validatePrice, getPriceErrorMessage);
-pristine.addValidator(capacityRooms, validateCapacity, getCapacityErrorMessage);
-pristine.addValidator(quantityGuests, validateCapacity, getCapacityErrorMessage);
+pristine.addValidator(quantityRooms, validateCapacity, getCapacityErrorMessage);
+pristine.addValidator(capacityGuests, validateCapacity, getCapacityErrorMessage);

@@ -8,6 +8,8 @@ const AUTHOR_URL = 'img/avatars/user';
 const ROOM_WORDS = ['комната', 'комнаты', 'комнат'];
 const GUEST_WORDS = ['гостя', 'гостей', 'гостей'];
 
+const TITLE_ERROR_MESSAGE = 'От 30 до 100 символов';
+
 const typesHouse = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
@@ -16,14 +18,14 @@ const typesHouse = {
   hotel: 'Отель',
 };
 
-const capacityOptions = {
+const capacityGuestsOptions = {
   1: ['1'],
   2: ['2', '1'],
   3: ['3', '2', '1'],
   100: ['0'],
 };
 
-const minAmount = {
+const minPriceAmount = {
   bungalow: 0,
   flat: 1000,
   hotel: 3000,
@@ -123,6 +125,7 @@ export {
   typesHouse,
   ROOM_WORDS,
   GUEST_WORDS,
-  minAmount,
-  capacityOptions,
+  minPriceAmount,
+  capacityGuestsOptions,
+  TITLE_ERROR_MESSAGE,
 };
