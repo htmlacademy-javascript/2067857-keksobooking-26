@@ -3,7 +3,6 @@ import {
   ROOM_WORDS,
   GUEST_WORDS,
   capacityGuestsOptions,
-  TITLE_ERROR_MESSAGE,
   MIN_TITLE_STRING_LENGTH,
   MAX_TITLE_STRING_LENGTH,
 } from './data.js';
@@ -30,7 +29,12 @@ function validateTitle(value) {
 }
 
 function validatePrice(value) {
-  return value.length && parseInt(value, 10) >= minPriceAmount[houseTypeElements[0].value];
+  return value.length >= 0 && parseInt(value, 10) >= minPriceAmount[houseTypeElements[0].value];
+}
+
+function getTypeErrorMessage() {
+  return `${'от'} ${MIN_TITLE_STRING_LENGTH}
+ ${'до'} ${MAX_TITLE_STRING_LENGTH} ${'символов'}`;
 }
 
 function onTypeChange() {
@@ -73,28 +77,28 @@ function getCapacityErrorMessage() {
     quantityRoomsElements[0].value,
     ROOM_WORDS
   )}
-          ${'для '}${capacityGuestsElements[0].value} ${getPluralWord(
+  ${'для '}${capacityGuestsElements[0].value} ${getPluralWord(
   capacityGuestsElements[0].value,
   GUEST_WORDS
 )}
-          ${':неприменимо'}`;
+  ${':неприменимо'}`;
 }
 
-function validateForm(evt) {
-  const isValid = pristine.validate();
-  if (!isValid) {
-    evt.preventDefault();
-  }
+function addFormSubmitHandler() {
+  proposalForm.addEventListener('submit', (evt) => {
+    const isValid = pristine.validate();
+    if (!isValid) {
+      evt.preventDefault();
+    }
 
-  pristine.validate();
+    pristine.validate();
+  });
 }
 
-proposalForm.addEventListener('submit', (evt) => {
-  validateForm(evt);
-});
+addFormSubmitHandler();
 
-pristine.validate();
-pristine.addValidator(titleField, validateTitle, TITLE_ERROR_MESSAGE);
+pristine.addValidator(titleField, validateTitle, getTypeErrorMessage);
+//pristine.validate();
 pristine.addValidator(priceField, validatePrice, getPriceErrorMessage);
 pristine.addValidator(quantityRoomsElements[0], validateCapacity, getCapacityErrorMessage);
 pristine.addValidator(capacityGuestsElements[0], validateCapacity, getCapacityErrorMessage);
