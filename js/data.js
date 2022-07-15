@@ -8,12 +8,30 @@ const AUTHOR_URL = 'img/avatars/user';
 const ROOM_WORDS = ['комната', 'комнаты', 'комнат'];
 const GUEST_WORDS = ['гостя', 'гостей', 'гостей'];
 
+const MIN_TITLE_STRING_LENGTH = '30';
+const MAX_TITLE_STRING_LENGTH = '100';
+
 const typesHouse = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
   house: 'Дом',
   palace: 'Дворец',
   hotel: 'Отель',
+};
+
+const capacityGuestsOptions = {
+  1: ['1'],
+  2: ['2', '1'],
+  3: ['3', '2', '1'],
+  100: ['0'],
+};
+
+const minPriceAmount = {
+  bungalow: 0,
+  flat: 1000,
+  hotel: 3000,
+  house: 5000,
+  palace: 10000,
 };
 
 const Offer = {
@@ -102,4 +120,14 @@ function createProposal() {
   };
 }
 
-export { SIMILAR_PROPOSAL_COUNT, createProposals, typesHouse, ROOM_WORDS, GUEST_WORDS };
+export {
+  SIMILAR_PROPOSAL_COUNT,
+  createProposals,
+  typesHouse,
+  ROOM_WORDS,
+  GUEST_WORDS,
+  minPriceAmount,
+  capacityGuestsOptions,
+  MIN_TITLE_STRING_LENGTH,
+  MAX_TITLE_STRING_LENGTH,
+};
