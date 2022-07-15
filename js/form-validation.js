@@ -98,7 +98,6 @@ function addFormSubmitHandler() {
 addFormSubmitHandler();
 
 pristine.addValidator(titleField, validateTitle, getTypeErrorMessage);
-//pristine.validate();
 pristine.addValidator(priceField, validatePrice, getPriceErrorMessage);
 pristine.addValidator(quantityRoomsElements[0], validateCapacity, getCapacityErrorMessage);
 pristine.addValidator(capacityGuestsElements[0], validateCapacity, getCapacityErrorMessage);
