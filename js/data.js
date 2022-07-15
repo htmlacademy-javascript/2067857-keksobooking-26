@@ -10,6 +10,9 @@ const GUEST_WORDS = ['гостя', 'гостей', 'гостей'];
 
 const TITLE_ERROR_MESSAGE = 'От 30 до 100 символов';
 
+const MIN_TITLE_STRING_LENGTH = '30';
+const MAX_TITLE_STRING_LENGTH = '100';
+
 const typesHouse = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
@@ -128,4 +131,6 @@ export {
   minPriceAmount,
   capacityGuestsOptions,
   TITLE_ERROR_MESSAGE,
+  MIN_TITLE_STRING_LENGTH,
+  MAX_TITLE_STRING_LENGTH,
 };
