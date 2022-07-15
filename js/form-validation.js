@@ -5,6 +5,7 @@ import {
   capacityGuestsOptions,
   MIN_TITLE_STRING_LENGTH,
   MAX_TITLE_STRING_LENGTH,
+  timeOptions,
 } from './data.js';
 import { getPluralWord } from './util.js';
 
@@ -14,6 +15,8 @@ const priceField = proposalForm.querySelector('#price');
 const houseTypeElements = proposalForm.querySelectorAll('[name="type"]');
 const quantityRoomsElements = proposalForm.querySelectorAll('[name="rooms"]');
 const capacityGuestsElements = proposalForm.querySelectorAll('[name="capacity"]');
+const timeOutElements = proposalForm.querySelectorAll('[name="timeout"]');
+const timeInElements = proposalForm.querySelectorAll('[name="timein"]');
 
 const pristine = new Pristine(proposalForm, {
   classTo: 'ad-form__element',
@@ -84,6 +87,26 @@ function getCapacityErrorMessage() {
   ${':неприменимо'}`;
 }
 
+function validateTime() {
+  return timeOptions[timeOutElements[0].value].includes(timeOutElements[0].value);
+}
+
+function onTimeChange() {
+  timeOutElements[0].value = timeOptions[this.value];
+  pristine.validate(timeOutElements[0]);
+
+  timeInElements[0].value = timeOptions[this.value];
+  pristine.validate(timeInElements[0]);
+}
+
+timeInElements.forEach((item) => {
+  item.addEventListener('change', onTimeChange);
+});
+
+timeOutElements.forEach((item) => {
+  item.addEventListener('change', onTimeChange);
+});
+
 function addFormSubmitHandler() {
   proposalForm.addEventListener('submit', (evt) => {
     const isValid = pristine.validate();
@@ -101,3 +124,5 @@ pristine.addValidator(titleField, validateTitle, getTypeErrorMessage);
 pristine.addValidator(priceField, validatePrice, getPriceErrorMessage);
 pristine.addValidator(quantityRoomsElements[0], validateCapacity, getCapacityErrorMessage);
 pristine.addValidator(capacityGuestsElements[0], validateCapacity, getCapacityErrorMessage);
+pristine.addValidator(timeOutElements[0], validateTime);
+pristine.addValidator(timeOutElements[0], validateTime);

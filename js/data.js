@@ -34,6 +34,12 @@ const minPriceAmount = {
   palace: 10000,
 };
 
+const timeOptions = {
+  '12:00': '12:00',
+  '13:00': '13:00',
+  '14:00': '14:00',
+};
+
 const Offer = {
   TITLE: 'Welcome to vacation',
 
@@ -130,4 +136,5 @@ export {
   capacityGuestsOptions,
   MIN_TITLE_STRING_LENGTH,
   MAX_TITLE_STRING_LENGTH,
+  timeOptions,
 };
