@@ -7,12 +7,13 @@ const map = L.map('map-canvas').setView(
   },
   10
 );
+
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution:
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
-const mapLoaded = map.on('load');
+const mapLoaded = () => map.on('load');
 
 const mainPinIcon = L.icon({
   iconUrl: './img/main-pin.svg',
@@ -37,6 +38,8 @@ const mainPinMarker = L.marker(
   }
 );
 
+mainPinMarker.addTo(map);
+
 const markerGroup = L.layerGroup().addTo(map);
 
 const createMarkers = (proposal) => {
@@ -51,8 +54,6 @@ const createMarkers = (proposal) => {
   );
   marker.addTo(markerGroup).bindPopup(createProposalPopup(proposal));
 };
-
-mainPinMarker.addTo(map);
 
 proposalCards.forEach((proposal) => {
   createMarkers(proposal);
