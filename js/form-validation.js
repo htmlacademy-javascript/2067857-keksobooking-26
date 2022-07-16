@@ -8,6 +8,7 @@ import {
   timeOptions,
 } from './data.js';
 import { getPluralWord } from './util.js';
+import { mainPinMarker } from './map-activation.js';
 
 const proposalForm = document.querySelector('.ad-form');
 const titleField = proposalForm.querySelector('#title');
@@ -17,6 +18,7 @@ const quantityRoomsElements = proposalForm.querySelectorAll('[name="rooms"]');
 const capacityGuestsElements = proposalForm.querySelectorAll('[name="capacity"]');
 const timeOutElements = proposalForm.querySelectorAll('[name="timeout"]');
 const timeInElements = proposalForm.querySelectorAll('[name="timein"]');
+const addressElement = proposalForm.querySelector('[name="address"]');
 
 const pristine = new Pristine(proposalForm, {
   classTo: 'ad-form__element',
@@ -42,6 +44,7 @@ function getTypeErrorMessage() {
 
 function onTypeChange() {
   priceField.placeholder = minPriceAmount[this.value];
+  priceField.value = minPriceAmount[this.value];
   pristine.validate(priceField);
 }
 
@@ -107,6 +110,17 @@ timeOutElements.forEach((item) => {
   item.addEventListener('change', onTimeChange);
 });
 
+function getAddress() {
+  mainPinMarker.on('moveend', (evt) => {
+    const LatLang = evt.target.getLatLng();
+
+    addressElement.value = `${'lat:'} ${LatLang.lat.toFixed(5)}, ${'lng:'} ${LatLang.lng.toFixed(
+      5
+    )}`;
+  });
+}
+getAddress();
+
 function addFormSubmitHandler() {
   proposalForm.addEventListener('submit', (evt) => {
     const isValid = pristine.validate();
@@ -126,3 +140,5 @@ pristine.addValidator(quantityRoomsElements[0], validateCapacity, getCapacityErr
 pristine.addValidator(capacityGuestsElements[0], validateCapacity, getCapacityErrorMessage);
 pristine.addValidator(timeOutElements[0], validateTime);
 pristine.addValidator(timeOutElements[0], validateTime);
+
+export { priceField };

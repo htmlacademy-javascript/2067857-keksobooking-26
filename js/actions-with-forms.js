@@ -1,3 +1,5 @@
+import { mapLoaded, mainPinMarker, markerGroup } from './map-activation.js';
+
 const proposalForm = document.querySelector('.ad-form');
 const mapFiltersElement = document.querySelector('.map__filters');
 const selectedElements = document.querySelectorAll('select');
@@ -14,9 +16,9 @@ function disableForms() {
   fieldsetElements.forEach((element) => {
     element.setAttribute('disabled', 'disabled');
   });
+  mainPinMarker.remove();
+  markerGroup.remove();
 }
-
-disableForms();
 
 function enableForms() {
   proposalForm.classList.remove('ad-form--disabled');
@@ -31,4 +33,12 @@ function enableForms() {
   });
 }
 
-enableForms();
+function mapActivationToggler() {
+  if (!mapLoaded) {
+    disableForms();
+  } else {
+    enableForms();
+  }
+}
+
+mapActivationToggler();
