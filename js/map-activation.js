@@ -1,9 +1,10 @@
 import { proposalCards, createProposalPopup } from './popup.js';
+import { MainPinCoordinate } from './data.js';
 
 const map = L.map('map-canvas').setView(
   {
-    lat: 35.6938,
-    lng: 139.7034,
+    lat: MainPinCoordinate.LAT,
+    lng: MainPinCoordinate.LNG,
   },
   10
 );
@@ -29,8 +30,8 @@ const icon = L.icon({
 
 const mainPinMarker = L.marker(
   {
-    lat: 35.6938,
-    lng: 139.7034,
+    lat: MainPinCoordinate.LAT,
+    lng: MainPinCoordinate.LNG,
   },
   {
     draggable: true,

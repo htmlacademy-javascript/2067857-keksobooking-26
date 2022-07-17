@@ -40,6 +40,11 @@ const timeOptions = {
   '14:00': '14:00',
 };
 
+const MainPinCoordinate = {
+  LAT: 35.6938,
+  LNG: 139.7034,
+};
+
 const Offer = {
   TITLE: 'Welcome to vacation',
 
@@ -137,4 +142,6 @@ export {
   MIN_TITLE_STRING_LENGTH,
   MAX_TITLE_STRING_LENGTH,
   timeOptions,
+  Location,
+  MainPinCoordinate,
 };
