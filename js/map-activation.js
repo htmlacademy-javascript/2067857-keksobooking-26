@@ -13,7 +13,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
-const mapLoaded = () => map.on('load');
+const onMapLoad = () => map.on('load');
 
 const mainPinIcon = L.icon({
   iconUrl: './img/main-pin.svg',
@@ -59,4 +59,4 @@ proposalCards.forEach((proposal) => {
   createMarkers(proposal);
 });
 
-export { mainPinMarker, mapLoaded, markerGroup };
+export { mainPinMarker, onMapLoad, markerGroup };

@@ -1,5 +1,3 @@
-import { priceField } from './form-validation.js';
-
 const sliderElement = document.querySelector('.ad-form__slider');
 
 noUiSlider.create(sliderElement, {
@@ -23,12 +21,4 @@ noUiSlider.create(sliderElement, {
   },
 });
 
-function onSliderRangeChange() {
-  sliderElement.noUiSlider.on('change', () => {
-    priceField.value = sliderElement.noUiSlider.get();
-  });
-  priceField.addEventListener('input', () => {
-    sliderElement.noUiSlider.set(priceField.value);
-  });
-}
-onSliderRangeChange();
+export { sliderElement };

@@ -9,6 +9,7 @@ import {
 } from './data.js';
 import { getPluralWord } from './util.js';
 import { mainPinMarker } from './map-activation.js';
+import { sliderElement } from './slider-creation.js';
 
 const proposalForm = document.querySelector('.ad-form');
 const titleField = proposalForm.querySelector('#title');
@@ -45,12 +46,31 @@ function getTypeErrorMessage() {
 function onTypeChange() {
   priceField.placeholder = minPriceAmount[this.value];
   priceField.value = minPriceAmount[this.value];
+  sliderElement.noUiSlider.set(minPriceAmount[this.value]);
+  priceField.value = sliderElement.noUiSlider.get();
   pristine.validate(priceField);
 }
 
 houseTypeElements.forEach((item) => {
   item.addEventListener('change', onTypeChange);
 });
+
+function onPriceChange() {
+  priceField.addEventListener('input', () => {
+    sliderElement.noUiSlider.set(priceField.value);
+  });
+}
+
+onPriceChange();
+
+function onSliderRangeChange() {
+  sliderElement.noUiSlider.on('change', () => {
+    priceField.value = sliderElement.noUiSlider.get();
+    pristine.validate(priceField);
+  });
+}
+
+onSliderRangeChange();
 
 function getPriceErrorMessage() {
   return `Не менее ${minPriceAmount[houseTypeElements[0].value]} ₽ в выбранной категории`;
@@ -119,6 +139,7 @@ function getAddress() {
     )}`;
   });
 }
+
 getAddress();
 
 function addFormSubmitHandler() {

@@ -1,4 +1,4 @@
-import { mapLoaded, mainPinMarker, markerGroup } from './map-activation.js';
+import { onMapLoad, mainPinMarker, markerGroup } from './map-activation.js';
 
 const proposalForm = document.querySelector('.ad-form');
 const mapFiltersElement = document.querySelector('.map__filters');
@@ -34,7 +34,7 @@ function enableForms() {
 }
 
 function mapActivationToggler() {
-  if (!mapLoaded) {
+  if (!onMapLoad) {
     disableForms();
   } else {
     enableForms();
