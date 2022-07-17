@@ -1,20 +1,26 @@
 import { proposalCards, createProposalPopup } from './popup.js';
 import { MainPinCoordinate } from './data.js';
 
-const map = L.map('map-canvas').setView(
-  {
-    lat: MainPinCoordinate.LAT,
-    lng: MainPinCoordinate.LNG,
-  },
-  10
-);
+const map = L.map('map-canvas');
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution:
-    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-}).addTo(map);
+const mapInst = () => {
+  map.setView(
+    {
+      lat: MainPinCoordinate.LAT,
+      lng: MainPinCoordinate.LNG,
+    },
+    10
+  );
 
-const onMapLoad = () => map.on('load');
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  }).addTo(map);
+};
+
+mapInst();
+
+const onMapLoad = (cb) => map.on('load', cb);
 
 const mainPinIcon = L.icon({
   iconUrl: './img/main-pin.svg',
@@ -60,4 +66,4 @@ proposalCards.forEach((proposal) => {
   createMarkers(proposal);
 });
 
-export { mainPinMarker, onMapLoad, markerGroup };
+export { mainPinMarker, onMapLoad, mapInst };
