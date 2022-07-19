@@ -1,7 +1,7 @@
 import { getRandomIntInclusive, getRandomArbitrary, getMixArray } from './util.js';
 import { getAvatarArray } from './additional-functions.js';
 
-const SIMILAR_PROPOSAL_COUNT = 1;
+const SIMILAR_PROPOSAL_COUNT = 10;
 
 const AUTHOR_URL = 'img/avatars/user';
 
@@ -38,6 +38,11 @@ const timeOptions = {
   '12:00': '12:00',
   '13:00': '13:00',
   '14:00': '14:00',
+};
+
+const MainPinCoordinate = {
+  LAT: 35.6938,
+  LNG: 139.7034,
 };
 
 const Offer = {
@@ -137,4 +142,6 @@ export {
   MIN_TITLE_STRING_LENGTH,
   MAX_TITLE_STRING_LENGTH,
   timeOptions,
+  Location,
+  MainPinCoordinate,
 };

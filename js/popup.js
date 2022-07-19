@@ -1,13 +1,11 @@
 import { createProposals, typesHouse, ROOM_WORDS, GUEST_WORDS } from './data.js';
 import { getPluralWord } from './util.js';
 
-const mapCanvas = document.querySelector('#map-canvas');
-
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
 
 const proposalCards = createProposals;
 
-proposalCards.forEach((proposal) => {
+function createProposalPopup(proposal) {
   const cardElement = cardTemplate.cloneNode(true);
 
   cardElement.querySelector('.popup__avatar').src = proposal.author.avatar;
@@ -30,8 +28,9 @@ proposalCards.forEach((proposal) => {
   getFeaturesElement(cardElement, proposal);
   getPhotosElement(cardElement, proposal);
 
-  mapCanvas.appendChild(cardElement);
-});
+  return cardElement;
+
+}
 
 function getHouseTypeElement(cardElement, proposal) {
   cardElement.querySelector('.popup__type').innerHTML = '';
@@ -79,3 +78,4 @@ function getCapacityElements(cardElement, proposal) {
     ROOM_WORDS
   )} для ${guests} ${getPluralWord(guests, GUEST_WORDS)}`;
 }
+export{proposalCards,createProposalPopup};
