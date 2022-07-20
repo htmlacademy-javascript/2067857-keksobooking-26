@@ -86,3 +86,4 @@ function getCapacityElements(cardElement, proposals) {
 }
 
 export { createProposalPopup };
+
