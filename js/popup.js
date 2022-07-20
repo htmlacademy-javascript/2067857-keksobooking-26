@@ -84,4 +84,6 @@ function getCapacityElements(cardElement, proposals) {
     ROOM_WORDS
   )} для ${guests} ${getPluralWord(guests, GUEST_WORDS)}`;
 }
+
 export { createProposalPopup };
+

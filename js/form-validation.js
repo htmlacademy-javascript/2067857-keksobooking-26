@@ -18,6 +18,7 @@ import {
   showErrorMessage,
 } from './submit-alert-messages.js';
 
+
 const proposalForm = document.querySelector('.ad-form');
 const titleField = proposalForm.querySelector('#title');
 const priceField = proposalForm.querySelector('#price');
@@ -150,6 +151,7 @@ function getAddress() {
 getAddress();
 
 function addFormSubmitHandler(onSuccess) {
+
   proposalForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
