@@ -1,5 +1,6 @@
 import { onMapLoad, mapInst } from './map-activation.js';
 
+
 const proposalForm = document.querySelector('.ad-form');
 const mapFiltersElement = document.querySelector('.map__filters');
 const selectedElements = document.querySelectorAll('select');
