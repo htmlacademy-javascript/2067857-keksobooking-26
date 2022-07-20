@@ -63,3 +63,4 @@ const createMarkers = (proposal) => {
 };
 
 export { mainPinMarker, onMapLoad, mapInst, createMarkers };
+
