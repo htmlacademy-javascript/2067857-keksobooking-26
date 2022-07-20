@@ -1,4 +1,4 @@
-import { proposalCards, createProposalPopup } from './popup.js';
+import { createProposalPopup } from './popup.js';
 import { MainPinCoordinate } from './data.js';
 
 const map = L.map('map-canvas');
@@ -62,8 +62,4 @@ const createMarkers = (proposal) => {
   marker.addTo(markerGroup).bindPopup(createProposalPopup(proposal));
 };
 
-proposalCards.forEach((proposal) => {
-  createMarkers(proposal);
-});
-
-export { mainPinMarker, onMapLoad, mapInst };
+export { mainPinMarker, onMapLoad, mapInst, createMarkers };
