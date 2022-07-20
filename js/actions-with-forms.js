@@ -16,6 +16,7 @@ function disableForms() {
   fieldsetElements.forEach((element) => {
     element.setAttribute('disabled', 'disabled');
   });
+
 }
 
 disableForms();

@@ -15,4 +15,3 @@ getData((proposals) => {
 });
 
 addFormSubmitHandler(closeSuccessMessage);
-

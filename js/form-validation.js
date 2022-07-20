@@ -18,7 +18,6 @@ import {
   showErrorMessage,
 } from './submit-alert-messages.js';
 
-
 const proposalForm = document.querySelector('.ad-form');
 const titleField = proposalForm.querySelector('#title');
 const priceField = proposalForm.querySelector('#price');
