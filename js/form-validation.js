@@ -18,7 +18,6 @@ import {
   showErrorMessage,
 } from './submit-alert-messages.js';
 
-
 const proposalForm = document.querySelector('.ad-form');
 const titleField = proposalForm.querySelector('#title');
 const priceField = proposalForm.querySelector('#price');
@@ -139,10 +138,12 @@ timeOutElements.forEach((item) => {
 });
 
 function getAddress() {
-  mainPinMarker.on('moveend', (evt) => {
-    const LatLang = evt.target.getLatLng();
+  const LatLang = mainPinMarker.getLatLng();
+  addressElement.value = `${'lat:'} ${LatLang.lat.toFixed(5)}, ${'lng:'} ${LatLang.lng.toFixed(5)}`;
 
-    addressElement.value = `${'lat:'} ${LatLang.lat.toFixed(5)}, ${'lng:'} ${LatLang.lng.toFixed(
+  mainPinMarker.on('moveend', (evt) => {
+    const onMovedLatLang = evt.target.getLatLng();
+    addressElement.value = `${'lat:'} ${onMovedLatLang.lat.toFixed(5)}, ${'lng:'} ${onMovedLatLang.lng.toFixed(
       5
     )}`;
   });
@@ -151,7 +152,6 @@ function getAddress() {
 getAddress();
 
 function addFormSubmitHandler(onSuccess) {
-
   proposalForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
 

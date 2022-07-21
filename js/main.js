@@ -1,6 +1,3 @@
-import './form-validation.js';
-import './map-activation.js';
-import './submit-alert-messages.js';
 import './actions-with-forms.js';
 import { addFormSubmitHandler } from './form-validation.js';
 import { closeSuccessMessage } from './submit-alert-messages.js';
