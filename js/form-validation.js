@@ -10,6 +10,13 @@ import {
 import { getPluralWord } from './util.js';
 import { mainPinMarker } from './map-activation.js';
 import { sliderElement } from './slider-creation.js';
+import { sendData } from './api.js';
+import {
+  blockSubmitButton,
+  showSuccessMessage,
+  closeErrorMessage,
+  showErrorMessage,
+} from './submit-alert-messages.js';
 
 const proposalForm = document.querySelector('.ad-form');
 const titleField = proposalForm.querySelector('#title');
@@ -131,10 +138,12 @@ timeOutElements.forEach((item) => {
 });
 
 function getAddress() {
-  mainPinMarker.on('moveend', (evt) => {
-    const LatLang = evt.target.getLatLng();
+  const LatLang = mainPinMarker.getLatLng();
+  addressElement.value = `${'lat:'} ${LatLang.lat.toFixed(5)}, ${'lng:'} ${LatLang.lng.toFixed(5)}`;
 
-    addressElement.value = `${'lat:'} ${LatLang.lat.toFixed(5)}, ${'lng:'} ${LatLang.lng.toFixed(
+  mainPinMarker.on('moveend', (evt) => {
+    const onMovedLatLang = evt.target.getLatLng();
+    addressElement.value = `${'lat:'} ${onMovedLatLang.lat.toFixed(5)}, ${'lng:'} ${onMovedLatLang.lng.toFixed(
       5
     )}`;
   });
@@ -142,18 +151,27 @@ function getAddress() {
 
 getAddress();
 
-function addFormSubmitHandler() {
+function addFormSubmitHandler(onSuccess) {
   proposalForm.addEventListener('submit', (evt) => {
-    const isValid = pristine.validate();
-    if (!isValid) {
-      evt.preventDefault();
-    }
+    evt.preventDefault();
 
-    pristine.validate();
+    const isValid = pristine.validate();
+    if (isValid) {
+      blockSubmitButton();
+      sendData(
+        () => {
+          onSuccess();
+          showSuccessMessage();
+        },
+        () => {
+          showErrorMessage();
+          closeErrorMessage();
+        },
+        new FormData(evt.target)
+      );
+    }
   });
 }
-
-addFormSubmitHandler();
 
 pristine.addValidator(titleField, validateTitle, getTypeErrorMessage);
 pristine.addValidator(priceField, validatePrice, getPriceErrorMessage);
@@ -162,4 +180,4 @@ pristine.addValidator(capacityGuestsElements[0], validateCapacity, getCapacityEr
 pristine.addValidator(timeOutElements[0], validateTime);
 pristine.addValidator(timeOutElements[0], validateTime);
 
-export { priceField };
+export { priceField, addFormSubmitHandler };
