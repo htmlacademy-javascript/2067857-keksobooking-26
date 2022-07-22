@@ -62,4 +62,5 @@ const createMarkers = (proposal) => {
   marker.addTo(markerGroup).bindPopup(createProposalPopup(proposal));
 };
 
+
 export { mainPinMarker, onMapLoad, mapInst, createMarkers };
