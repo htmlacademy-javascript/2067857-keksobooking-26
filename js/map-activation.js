@@ -1,26 +1,24 @@
 import { createProposalPopup } from './popup.js';
 import { MainPinCoordinate } from './data.js';
+import { enableForms, disableForms } from './actions-with-forms.js';
+import { SIMILAR_PROPOSAL_COUNT } from './data.js';
 
-const map = L.map('map-canvas');
+disableForms();
 
-const mapInst = () => {
-  map.setView(
-    {
-      lat: MainPinCoordinate.LAT,
-      lng: MainPinCoordinate.LNG,
-    },
-    10
-  );
+const map = L.map('map-canvas').on('load', enableForms);
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  }).addTo(map);
-};
+map.setView(
+  {
+    lat: MainPinCoordinate.LAT,
+    lng: MainPinCoordinate.LNG,
+  },
+  12
+);
 
-mapInst();
-
-const onMapLoad = (cb) => map.on('load', cb);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution:
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+}).addTo(map);
 
 const mainPinIcon = L.icon({
   iconUrl: './img/main-pin.svg',
@@ -49,18 +47,23 @@ mainPinMarker.addTo(map);
 
 const markerGroup = L.layerGroup().addTo(map);
 
-const createMarkers = (proposal) => {
+const createMarkers = (proposals) => {
   const marker = L.marker(
     {
-      lat: proposal.location.lat,
-      lng: proposal.location.lng,
+      lat: proposals.location.lat,
+      lng: proposals.location.lng,
     },
     {
       icon,
     }
   );
-  marker.addTo(markerGroup).bindPopup(createProposalPopup(proposal));
+  marker.addTo(markerGroup).bindPopup(createProposalPopup(proposals));
 };
 
+function createProposals(proposals) {
+  proposals.slice(0, SIMILAR_PROPOSAL_COUNT).forEach((proposal) => {
+    createMarkers(proposal);
+  });
+}
 
-export { mainPinMarker, onMapLoad, mapInst, createMarkers };
+export { mainPinMarker, createMarkers, markerGroup, createProposals };
