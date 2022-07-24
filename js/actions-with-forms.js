@@ -1,5 +1,3 @@
-import { onMapLoad, mapInst } from './map-activation.js';
-
 const proposalForm = document.querySelector('.ad-form');
 const mapFiltersElement = document.querySelector('.map__filters');
 const selectedElements = document.querySelectorAll('select');
@@ -18,8 +16,6 @@ function disableForms() {
   });
 }
 
-disableForms();
-
 function enableForms() {
   proposalForm.classList.remove('ad-form--disabled');
   mapFiltersElement.classList.remove('map__filters--disabled');
@@ -33,6 +29,4 @@ function enableForms() {
   });
 }
 
-if (onMapLoad(mapInst)) {
-  enableForms();
-}
+export { disableForms, enableForms };

@@ -6,6 +6,8 @@ const GUEST_WORDS = ['гостя', 'гостей', 'гостей'];
 const MIN_TITLE_STRING_LENGTH = '30';
 const MAX_TITLE_STRING_LENGTH = '100';
 
+const RERENDER_DELAY = 500;
+
 const BAD_REQUEST_MESSAGE =
   'Что-то пошло не так...данные не загрузились. Попробуйте перезагрузить страницу';
 
@@ -58,4 +60,5 @@ export {
   MainPinCoordinate,
   BAD_REQUEST_MESSAGE,
   ALERT_SHOW_TIME,
+  RERENDER_DELAY,
 };

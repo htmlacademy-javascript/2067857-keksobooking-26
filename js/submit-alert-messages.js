@@ -2,14 +2,9 @@ import { ALERT_SHOW_TIME } from './data.js';
 
 const successAlert = document.querySelector('#success').content.querySelector('.success');
 const errorAlert = document.querySelector('#error').content.querySelector('.error');
-const submitButton = document.querySelector('.ad-form__submit');
 const errorButton = errorAlert.querySelector('.error__button');
 const isEscapeKey = (evt) => evt.key === 'Escape';
 const resetButton = document.querySelector('.ad-form__reset');
-
-const blockSubmitButton = () => {
-  submitButton.disabled = true;
-};
 
 const closeSuccessMessage = () => {
   document.addEventListener('keydown', (evt) => {
@@ -19,7 +14,7 @@ const closeSuccessMessage = () => {
       location.reload();
     }
   });
-  document.addEventListener('click', ()=>{
+  document.addEventListener('click', () => {
     errorAlert.classList.add('hidden');
     location.reload();
   });
@@ -30,22 +25,23 @@ const showSuccessMessage = () => {
 };
 
 const closeErrorMessage = () => {
-  document.addEventListener('keydown',(evt) => {
+  document.addEventListener('keydown', (evt) => {
     if (isEscapeKey(evt)) {
       evt.preventDefault();
       errorAlert.classList.add('hidden');
     }
   });
-  errorButton.addEventListener('click',()=>{
+  errorButton.addEventListener('click', () => {
     errorAlert.classList.add('hidden');
   });
-  document.addEventListener('click', ()=>{
+  document.addEventListener('click', () => {
     errorAlert.classList.add('hidden');
   });
 };
 
 const showErrorMessage = () => {
   document.body.append(errorAlert);
+  errorAlert.classList.remove('hidden');
 };
 
 const showAlert = (message) => {
@@ -69,19 +65,12 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-function onResetHendler (){
+function onResetHendler() {
   resetButton.addEventListener('click', () => {
     location.reload();
   });
 }
 
-onResetHendler ();
+onResetHendler();
 
-export {
-  blockSubmitButton,
-  closeSuccessMessage,
-  showSuccessMessage,
-  closeErrorMessage,
-  showErrorMessage,
-  showAlert,
-};
+export { closeSuccessMessage, showSuccessMessage, closeErrorMessage, showErrorMessage, showAlert };

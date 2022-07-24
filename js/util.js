@@ -13,4 +13,12 @@ function getPluralWord(value, word) {
   return word[2];
 }
 
-export { getPluralWord };
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+export { getPluralWord, debounce };
