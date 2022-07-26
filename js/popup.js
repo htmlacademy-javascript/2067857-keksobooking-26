@@ -4,6 +4,7 @@ import { getPluralWord } from './util.js';
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
 
 function createProposalPopup(proposals) {
+
   const cardElement = cardTemplate.cloneNode(true);
 
   cardElement.querySelector('.popup__avatar').src = proposals.author.avatar;
