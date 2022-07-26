@@ -18,6 +18,8 @@ const BAD_REQUEST_MESSAGE =
 
 const ALERT_SHOW_TIME = 5000;
 
+const UPLOAIDING_PHOTOS_FILE_TYPES = ['jpg', 'jpeg', 'png'];
+
 const typesHouse = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
@@ -69,4 +71,5 @@ export {
   GET_DATA_URL,
   SEND_DATA_URL,
   PROPERTY_PRICE_CRITERIAS,
+  UPLOAIDING_PHOTOS_FILE_TYPES,
 };
