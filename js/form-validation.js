@@ -12,7 +12,6 @@ import { mainPinMarker } from './map-activation.js';
 import { sliderElement } from './slider-creation.js';
 import { sendData } from './api.js';
 import {
-  blockSubmitButton,
   showSuccessMessage,
   closeErrorMessage,
   showErrorMessage,
@@ -157,7 +156,6 @@ function addFormSubmitHandler(onSuccess) {
 
     const isValid = pristine.validate();
     if (isValid) {
-      blockSubmitButton();
       sendData(
         () => {
           onSuccess();
