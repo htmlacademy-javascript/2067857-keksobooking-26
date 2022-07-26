@@ -1,8 +1,8 @@
-import { BAD_REQUEST_MESSAGE } from './data.js';
+import { BAD_REQUEST_MESSAGE, GET_DATA_URL, SEND_DATA_URL } from './data.js';
 import { showAlert } from './submit-alert-messages.js';
 
 const getData = (onSuccess) =>
-  fetch('https://26.javascript.pages.academy/keksobooking/data')
+  fetch(GET_DATA_URL)
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -18,7 +18,7 @@ const getData = (onSuccess) =>
     });
 
 const sendData = (onSuccess, onFail, body) => {
-  fetch('https://26.javascript.pages.academy/keksobooking', {
+  fetch(SEND_DATA_URL, {
     method: 'POST',
     body,
   })

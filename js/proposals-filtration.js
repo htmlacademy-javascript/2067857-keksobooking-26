@@ -1,4 +1,4 @@
-import { SIMILAR_PROPOSAL_COUNT } from './data.js';
+import { SIMILAR_PROPOSAL_COUNT, PROPERTY_PRICE_CRITERIAS } from './data.js';
 import { markerGroup, createMarkers } from './map-activation.js';
 
 const filterTogglers = document.querySelectorAll('.map__filter');
@@ -53,13 +53,15 @@ function propertyPriceCompare(proposals) {
   const anyPrice = housingPriceFilterElement.value === 'any';
 
   const housePriceMiddle = propertyTypeCompare(proposals).filter(
-    (proposal) => proposal.offer.price >= 10000 || proposal.offer.price <= 50000
+    (proposal) =>
+      proposal.offer.price >= PROPERTY_PRICE_CRITERIAS[0] ||
+      proposal.offer.price <= PROPERTY_PRICE_CRITERIAS[1]
   );
   const housePriceLow = propertyTypeCompare(proposals).filter(
-    (propop) => propop.offer.price < 10000
+    (propop) => propop.offer.price < PROPERTY_PRICE_CRITERIAS[0]
   );
   const housePriceHigh = propertyTypeCompare(proposals).filter(
-    (proposal) => proposal.offer.price > 50000
+    (proposal) => proposal.offer.price > PROPERTY_PRICE_CRITERIAS[1]
   );
 
   if (anyPrice) {
@@ -106,7 +108,6 @@ function propertyFeaturesCompare(proposals) {
   const featureOptions = capacityGuestsCompare(proposals).filter((proposal) =>
     String(proposal.offer.features).includes(getFeaturesCheckedCheckBoxes())
   );
-
   return featureOptions;
 }
 

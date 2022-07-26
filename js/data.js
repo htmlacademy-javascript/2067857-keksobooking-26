@@ -8,10 +8,15 @@ const MAX_TITLE_STRING_LENGTH = '100';
 
 const RERENDER_DELAY = 500;
 
+const GET_DATA_URL = 'https://26.javascript.pages.academy/keksobooking/data';
+const SEND_DATA_URL = 'https://26.javascript.pages.academy/keksobooking';
+
+const PROPERTY_PRICE_CRITERIAS = [10000, 50000,];
+
 const BAD_REQUEST_MESSAGE =
   'Что-то пошло не так...данные не загрузились. Попробуйте перезагрузить страницу';
 
-const ALERT_SHOW_TIME = '5000';
+const ALERT_SHOW_TIME = 5000;
 
 const typesHouse = {
   flat: 'Квартира',
@@ -61,4 +66,7 @@ export {
   BAD_REQUEST_MESSAGE,
   ALERT_SHOW_TIME,
   RERENDER_DELAY,
+  GET_DATA_URL,
+  SEND_DATA_URL,
+  PROPERTY_PRICE_CRITERIAS,
 };
