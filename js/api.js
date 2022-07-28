@@ -1,8 +1,9 @@
 import { BAD_REQUEST_MESSAGE, GET_DATA_URL, SEND_DATA_URL } from './data.js';
 import { showAlert } from './submit-alert-messages.js';
+import { disableFileters } from './actions-with-forms.js';
 
-const getData = (onSuccess) =>
-  fetch(GET_DATA_URL)
+function getData(onSuccess) {
+  return fetch(GET_DATA_URL)
     .then((response) => {
       if (response.ok) {
         return response.json();
@@ -14,10 +15,12 @@ const getData = (onSuccess) =>
       onSuccess(proposals);
     })
     .catch(() => {
+      disableFileters();
       showAlert(BAD_REQUEST_MESSAGE);
     });
+}
 
-const sendData = (onSuccess, onFail, body) => {
+function sendData(onSuccess, onFail, body) {
   fetch(SEND_DATA_URL, {
     method: 'POST',
     body,
@@ -32,6 +35,6 @@ const sendData = (onSuccess, onFail, body) => {
     .catch(() => {
       onFail();
     });
-};
+}
 
 export { getData, sendData };

@@ -1,11 +1,12 @@
 import { createProposalPopup } from './popup.js';
 import { MainPinCoordinate } from './data.js';
-import { enableForms, disableForms } from './actions-with-forms.js';
+import { disableForm, enableForm, disableFileters, enableFilters } from './actions-with-forms.js';
 import { SIMILAR_PROPOSAL_COUNT } from './data.js';
 
-disableForms();
+disableForm();
+disableFileters();
 
-const map = L.map('map-canvas').on('load', enableForms);
+const map = L.map('map-canvas').on('load', enableForm, enableFilters());
 
 map.setView(
   {
@@ -47,7 +48,7 @@ mainPinMarker.addTo(map);
 
 const markerGroup = L.layerGroup().addTo(map);
 
-const createMarkers = (proposals) => {
+function createMarkers(proposals) {
   const marker = L.marker(
     {
       lat: proposals.location.lat,
@@ -58,7 +59,7 @@ const createMarkers = (proposals) => {
     }
   );
   marker.addTo(markerGroup).bindPopup(createProposalPopup(proposals));
-};
+}
 
 function createProposals(proposals) {
   proposals.slice(0, SIMILAR_PROPOSAL_COUNT).forEach((proposal) => {
