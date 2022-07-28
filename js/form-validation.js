@@ -142,9 +142,9 @@ function getAddress() {
 
   mainPinMarker.on('moveend', (evt) => {
     const onMovedLatLang = evt.target.getLatLng();
-    addressElement.value = `${'lat:'} ${onMovedLatLang.lat.toFixed(5)}, ${'lng:'} ${onMovedLatLang.lng.toFixed(
+    addressElement.value = `${'lat:'} ${onMovedLatLang.lat.toFixed(
       5
-    )}`;
+    )}, ${'lng:'} ${onMovedLatLang.lng.toFixed(5)}`;
   });
 }
 

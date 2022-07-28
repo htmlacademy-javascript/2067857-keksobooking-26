@@ -2,16 +2,15 @@ import { ALERT_SHOW_TIME } from './data.js';
 
 const successAlert = document.querySelector('#success').content.querySelector('.success');
 const errorAlert = document.querySelector('#error').content.querySelector('.error');
-const submitButton = document.querySelector('.ad-form__submit');
 const errorButton = errorAlert.querySelector('.error__button');
 const isEscapeKey = (evt) => evt.key === 'Escape';
 const resetButton = document.querySelector('.ad-form__reset');
 
-const blockSubmitButton = () => {
-  submitButton.disabled = true;
-};
+function showSuccessMessage() {
+  document.body.append(successAlert);
+}
 
-const closeSuccessMessage = () => {
+function closeSuccessMessage() {
   document.addEventListener('keydown', (evt) => {
     if (isEscapeKey(evt)) {
       evt.preventDefault();
@@ -19,36 +18,40 @@ const closeSuccessMessage = () => {
       location.reload();
     }
   });
-  document.addEventListener('click', ()=>{
+  document.addEventListener('click', () => {
     errorAlert.classList.add('hidden');
     location.reload();
   });
-};
+}
 
-const showSuccessMessage = () => {
-  document.body.append(successAlert);
-};
-
-const closeErrorMessage = () => {
-  document.addEventListener('keydown',(evt) => {
-    if (isEscapeKey(evt)) {
-      evt.preventDefault();
-      errorAlert.classList.add('hidden');
-    }
-  });
-  errorButton.addEventListener('click',()=>{
-    errorAlert.classList.add('hidden');
-  });
-  document.addEventListener('click', ()=>{
-    errorAlert.classList.add('hidden');
-  });
-};
-
-const showErrorMessage = () => {
+function showErrorMessage() {
   document.body.append(errorAlert);
-};
+  errorAlert.classList.remove('hidden');
+}
 
-const showAlert = (message) => {
+function closeErrorClickHandler() {
+  errorAlert.classList.add('hidden');
+
+  document.removeEventListener('click', closeErrorClickHandler);
+  document.removeEventListener('keydown', closeErrorKeydownHandler);
+}
+
+function closeErrorKeydownHandler(evt) {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    errorAlert.classList.add('hidden');
+    document.removeEventListener('keydown', closeErrorKeydownHandler);
+    document.removeEventListener('click', closeErrorClickHandler);
+  }
+}
+
+function closeErrorMessage() {
+  document.addEventListener('keydown', closeErrorKeydownHandler);
+  errorButton.addEventListener('click', closeErrorClickHandler);
+  document.addEventListener('click', closeErrorClickHandler);
+}
+
+function showAlert(message) {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = '100';
   alertContainer.style.position = 'absolute';
@@ -67,21 +70,14 @@ const showAlert = (message) => {
   setTimeout(() => {
     alertContainer.remove();
   }, ALERT_SHOW_TIME);
-};
+}
 
-function onResetHendler (){
+function onResetHandler() {
   resetButton.addEventListener('click', () => {
     location.reload();
   });
 }
 
-onResetHendler ();
+onResetHandler();
 
-export {
-  blockSubmitButton,
-  closeSuccessMessage,
-  showSuccessMessage,
-  closeErrorMessage,
-  showErrorMessage,
-  showAlert,
-};
+export { closeSuccessMessage, showSuccessMessage, closeErrorMessage, showErrorMessage, showAlert };

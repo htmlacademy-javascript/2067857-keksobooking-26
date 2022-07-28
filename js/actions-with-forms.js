@@ -1,32 +1,56 @@
 const proposalForm = document.querySelector('.ad-form');
 const mapFiltersElement = document.querySelector('.map__filters');
-const selectedElements = document.querySelectorAll('select');
-const fieldsetElements = document.querySelectorAll('fieldset');
+const formSelectedElements = document.querySelectorAll('select .ad-form__element');
+const formFieldsetElements = document.querySelectorAll('fieldset .ad-form__element');
+const filterSelectedElements = document.querySelectorAll('select .map__filter');
+const filterFieldsetElements = document.querySelectorAll('fieldset .map__filter');
 
-function disableForms() {
+function disableForm() {
   proposalForm.classList.add('ad-form--disabled');
+
+  formSelectedElements.forEach((element) => {
+    element.setAttribute('disabled', 'disabled');
+  });
+
+  formFieldsetElements.forEach((element) => {
+    element.setAttribute('disabled', 'disabled');
+  });
+}
+
+function enableForm() {
+  proposalForm.classList.remove('ad-form--disabled');
+
+  formSelectedElements.forEach((element) => {
+    element.removeAttribute('disabled');
+  });
+
+  formFieldsetElements.forEach((element) => {
+    element.removeAttribute('disabled');
+  });
+}
+
+function disableFileters() {
   mapFiltersElement.classList.add('map__filters--disabled');
 
-  selectedElements.forEach((element) => {
+  filterSelectedElements.forEach((element) => {
     element.setAttribute('disabled', 'disabled');
   });
 
-  fieldsetElements.forEach((element) => {
+  filterFieldsetElements.forEach((element) => {
     element.setAttribute('disabled', 'disabled');
   });
 }
 
-function enableForms() {
-  proposalForm.classList.remove('ad-form--disabled');
+function enableFilters() {
   mapFiltersElement.classList.remove('map__filters--disabled');
 
-  selectedElements.forEach((element) => {
-    element.removeAttribute('disabled', 'disabled');
+  filterSelectedElements.forEach((element) => {
+    element.removeAttribute('disabled');
   });
 
-  fieldsetElements.forEach((element) => {
-    element.removeAttribute('disabled', 'disabled');
+  filterFieldsetElements.forEach((element) => {
+    element.removeAttribute('disabled');
   });
 }
 
-export { disableForms, enableForms };
+export { disableForm, enableForm, disableFileters, enableFilters };

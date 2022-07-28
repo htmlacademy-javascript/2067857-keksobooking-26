@@ -9,7 +9,7 @@ import { addFormSubmitHandler } from './form-validation.js';
 import { closeSuccessMessage } from './submit-alert-messages.js';
 import { RERENDER_DELAY } from './data.js';
 import { debounce } from './util.js';
-import {uploadPropertyPhoto, uploadAvatarPhoto} from './upload-photos.js';
+import { uploadPropertyPhoto, uploadAvatarPhoto } from './upload-photos.js';
 
 getData((proposals) => {
   createProposals(proposals);
